@@ -1,6 +1,6 @@
 {
   "name": "facely",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A browser library for generating 3d faces from 2d images of people",
   "main": "/src/index.js",
   "scripts": {
