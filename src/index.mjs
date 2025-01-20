@@ -49,7 +49,7 @@ const reportProgress = (stage, total, message, complete) => {
   };
 };
 
-export const pipeline = async (imageFile, canvas, progress) => {
+export const facely = async (imageFile, canvas, progress) => {
   const stages = 6;
   // 0. setup
   progress(reportProgress(0, stages, "setting up...", false));
