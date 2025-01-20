@@ -86,7 +86,7 @@ export const pipeline = async (imageFile, canvas, progress) => {
   // 3. prediction
   progress(reportProgress(3, stages, "making predictions...", false));
 
-  const { handlePredictions } = await import("$lib/handlePredictions.mjs");
+  const { handlePredictions } = await import("./handlePredictions.mjs");
   const visualizations = await handlePredictions(imageUrl, config);
   console.log(visualizations);
   progress(reportProgress(3, stages, "predictions complete!", true));
