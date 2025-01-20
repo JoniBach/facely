@@ -49,17 +49,11 @@ const reportProgress = (stage, total, message, complete) => {
   };
 };
 
-export const facely = async (imageFile, canvas, progress) => {
+export const facely = async (imageFile, progress) => {
   const stages = 6;
   // 0. setup
   progress(reportProgress(0, stages, "setting up...", false));
   let newCanvas = document.createElement("canvas");
-  let mainScene = createThreeDScene({
-    canvas,
-    width: window.innerWidth * 0.8,
-    height: window.innerHeight,
-    backgroundColor: 0x202020,
-  });
 
   let newScene = createThreeDScene({
     canvas: newCanvas,
@@ -113,7 +107,7 @@ export const facely = async (imageFile, canvas, progress) => {
 
   return {
     canvas: newCanvas,
-    scene: mainScene,
+    scene: newScene,
     image: imageFile,
     imageUrl: imageUrl,
     texturedMesh: uvFaceMesh,
@@ -125,22 +119,18 @@ export const facely = async (imageFile, canvas, progress) => {
 
     add: {
       image: async (scene) =>
-        await addImageToScene(scene || mainScene, imageFile),
+        await addImageToScene(scene || newScene, imageFile),
       wireframe: async (scene) =>
-        await add3DObjectsToScene(scene || mainScene, visualizations, config),
+        await add3DObjectsToScene(scene || newScene, visualizations, config),
       vertices: async (scene) =>
-        await addVerticesMeshToScene(
-          scene || mainScene,
-          visualizations,
-          config
-        ),
+        await addVerticesMeshToScene(scene || newScene, visualizations, config),
       edges: async (scene) =>
-        await addEdgesMeshToScene(scene || mainScene, visualizations, config),
+        await addEdgesMeshToScene(scene || newScene, visualizations, config),
       faces: async (scene) =>
-        await addFacesMeshToScene(scene || mainScene, visualizations, config),
+        await addFacesMeshToScene(scene || newScene, visualizations, config),
       uvFace: async (scene) =>
         await generateUVTexturedFace(
-          scene || mainScene,
+          scene || newScene,
           visualizations,
           img,
           config
