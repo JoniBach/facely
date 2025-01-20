@@ -1,2 +1,1 @@
-export const add = (a, b) => a + b;
-export const subtract = (a, b) => a - b;
+export { pipeline as facely } from "./pipeline.js";
