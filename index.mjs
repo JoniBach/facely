@@ -7,11 +7,11 @@ import {
   getEdgesMesh,
   getFacesMesh,
   getVerticesMesh,
-} from "./handle3DObjects.mjs";
-import { handleDepthEstimation } from "./handleDepthEstimation.mjs";
-import { processDownloadAssets } from "./handleDownloads.mjs";
-import { addImageToScene, loadImage } from "./ImageHandler.mjs";
-import { createThreeDScene } from "./ThreeDScene.mjs";
+} from "./src/handle3DObjects.mjs";
+import { handleDepthEstimation } from "./src/handleDepthEstimation.mjs";
+import { processDownloadAssets } from "./src/handleDownloads.mjs";
+import { addImageToScene, loadImage } from "./src/ImageHandler.mjs";
+import { createThreeDScene } from "./src/ThreeDScene.mjs";
 
 const targetSceneWidth = 10;
 const config = {
@@ -80,7 +80,7 @@ export const facely = async (imageFile, progress) => {
   // 3. prediction
   progress(reportProgress(3, stages, "making predictions...", false));
 
-  const { handlePredictions } = await import("./handlePredictions.mjs");
+  const { handlePredictions } = await import("./src/handlePredictions.mjs");
   const visualizations = await handlePredictions(imageUrl, config);
   console.log(visualizations);
   progress(reportProgress(3, stages, "predictions complete!", true));
