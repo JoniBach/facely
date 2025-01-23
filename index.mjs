@@ -10,6 +10,7 @@ import {
 } from "./src/handle3DObjects.mjs";
 import { handleDepthEstimation } from "./src/handleDepthEstimation.mjs";
 import { processDownloadAssets } from "./src/handleDownloads.mjs";
+import { getViewableImages } from "./src/handleGetImages.mjs";
 import { addImageToScene, loadImage } from "./src/ImageHandler.mjs";
 import { createThreeDScene } from "./src/ThreeDScene.mjs";
 
@@ -105,13 +106,25 @@ export const facely = async (imageFile, progress) => {
   progress(reportProgress(6, stages, "reviewing process...", false));
   progress(reportProgress(6, stages, "process complete!", true));
 
+  // get images
+
+  const imagesObject = await getViewableImages(
+    imageFile,
+    imageUrl,
+    depthMapImage,
+    visualizations,
+    overlayTypes
+  );
+
   return {
     canvas: newCanvas,
     scene: newScene,
-    image: imageFile,
-    imageUrl: imageUrl,
+    // image: imageFile,
+    // imageUrl: imageUrl,
     texturedMesh: uvFaceMesh,
-    depthmap: depthEstimationResult,
+    // depthmap: depthEstimationResult,
+
+    image: imagesObject,
 
     verticesMesh: getVerticesMesh(visualizations, config),
     edgesMesh: getEdgesMesh(visualizations, config),
