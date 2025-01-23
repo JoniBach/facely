@@ -111,7 +111,7 @@ export const facely = async (imageFile, progress) => {
   const imagesObject = await getViewableImages(
     imageFile,
     imageUrl,
-    depthMapImage,
+    depthEstimationResult,
     visualizations,
     overlayTypes
   );
